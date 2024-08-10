@@ -1,0 +1,90 @@
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #ffffff; 
+  padding: 20px;
+  text-align: center;
+}
+
+
+.login-prompt {
+  background-color: #c0c0c0; 
+  color: #2c3e50; 
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+  border: 1px solid #dfe6e9; 
+}
+
+.login-prompt h1 {
+  font-size: 2rem;
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+.login-prompt p {
+  font-size: 1.1rem;
+  margin: 0 0 20px;
+}
+
+.login-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #3498db; 
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #3498db;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-link:hover {
+  color: #ffffff; 
+  background-color: #3498db; 
+  transform: scale(1.05);
+}
+
+
+.profile-header {
+  background-color: #f3f3f3; 
+  color: #2c3e50; 
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+  border: 1px solid #dfe6e9; 
+}
+
+.profile-title {
+  font-size: 2.2rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.profile-email {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.profile-actions {
+  margin-top: 20px;
+}
+
+.logout-button {
+  background-color: #e74c3c; 
+  color: #ffffff; 
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b; 
+  transform: scale(1.05);
+}
