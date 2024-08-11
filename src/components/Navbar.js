@@ -9,12 +9,15 @@ const Navbar = () => {
   const { cart, removeFromCart } = useCart();
 
   const toggleCart = () => {
-    setShowCart(!showCart);
+    setShowCart(prevState => !prevState);
   };
 
-  const handleCheckoutClick = () => {
-    setShowCart(false);
+  const handleRemove = (productId, quantity) => {
+    removeFromCart(productId, quantity);
   };
+
+  // Calculate total price
+  const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <nav className="navbar">
@@ -34,25 +37,58 @@ const Navbar = () => {
           <button className="cart-button" onClick={toggleCart}>
             <FaShoppingCart size={24} />
             {cart.length > 0 && (
-              <span className="cart-count">{cart.length}</span>
+              <span className="cart-count">{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
             )}
           </button>
           {showCart && (
-            <div className="cart-dropdown">
+            <div className={`cart-dropdown ${showCart ? 'show' : ''}`}>
               <h3>Your Cart</h3>
-              <ul className="cart-items">
-                {cart.map(item => (
-                  <li key={item._id} className="cart-item">
-                    <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
-                    <div className="cart-item-details">
-                      <p className="cart-item-name">{item.name}</p>
-                      <p className="cart-item-price">${item.price.toFixed(2)}</p>
-                    </div>
-                    <button className="remove-button" onClick={() => removeFromCart(item._id)}>Remove</button>
-                  </li>
-                ))}
-              </ul>
-              <Link to="/checkout" className="checkout-button" onClick={handleCheckoutClick}>Iniciar Pago</Link>
+              {cart.length === 0 ? (
+                <p>Your cart is empty.</p>
+              ) : (
+                <>
+                  <ul className="cart-items">
+                    {cart.map(item => (
+                      <li key={item._id} className="cart-item">
+                        <img 
+                          src={`${process.env.PUBLIC_URL}/assets/${item.imageUrl}`} 
+                          alt={item.name} 
+                          className="cart-item-image" 
+                        />
+                        <div className="cart-item-details">
+                          <p className="cart-item-name">{item.name}</p>
+                          <p className="cart-item-price">${item.price.toFixed(2)}</p>
+                          <p className="cart-item-quantity">Quantity: {item.quantity}</p>
+                        </div>
+                        <div className="cart-item-controls">
+                          <button 
+                            className="remove-button" 
+                            onClick={() => handleRemove(item._id, 1)}
+                          >
+                            Remove 1
+                          </button>
+                          <button 
+                            className="remove-button" 
+                            onClick={() => handleRemove(item._id, item.quantity)}
+                          >
+                            Remove All
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="cart-summary">
+                    <p className="cart-total">Total: ${totalPrice.toFixed(2)}</p>
+                    <Link 
+                      to="/checkout" 
+                      className="checkout-button" 
+                      onClick={() => setShowCart(false)}
+                    >
+                      Checkout
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

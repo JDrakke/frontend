@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -11,6 +10,7 @@ import ProductDetail from './pages/ProductDetail';
 import ProductList from './pages/ProductList';
 import Checkout from './pages/Checkout';
 import Cart from './components/cart';
+
 const App = () => {
   return (
     <>
@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<ProductList />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>

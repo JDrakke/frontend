@@ -1,9 +1,14 @@
 import React from 'react';
-import { useCart } from '../context/CartContext'; 
+import { useCart } from '../context/CartContext';
 import './Cart.css';
 
 const Cart = () => {
-  const { cart, removeFromCart } = useCart(); 
+  const { cart, removeFromCart } = useCart();
+
+  // Función para manejar la eliminación de una cantidad específica
+  const handleRemove = (productId, quantity) => {
+    removeFromCart(productId, quantity);
+  };
 
   return (
     <div className="cart-container">
@@ -14,11 +19,25 @@ const Cart = () => {
         <ul className="cart-list">
           {cart.map(product => (
             <li key={product._id} className="cart-item">
-              <img src={product.imageUrl} alt={product.name} className="cart-image" />
+              <img src={`${process.env.PUBLIC_URL}/assets/${product.image}`} alt={product.name} className="cart-image" />
               <div className="cart-info">
                 <h3 className="cart-name">{product.name}</h3>
                 <p className="cart-price">${product.price.toFixed(2)}</p>
-                <button className="remove-button" onClick={() => removeFromCart(product._id)}>Remove</button>
+                <div className="quantity-controls">
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleRemove(product._id, 1)}
+                  >
+                    Remove 1
+                  </button>
+                  <span className="quantity-display">{product.quantity}</span>
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleRemove(product._id, product.quantity)}
+                  >
+                    Remove All
+                  </button>
+                </div>
               </div>
             </li>
           ))}
@@ -29,3 +48,4 @@ const Cart = () => {
 };
 
 export default Cart;
+  
