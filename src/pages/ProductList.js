@@ -35,7 +35,7 @@ const ProductList = () => {
       <div className="product-grid">
         {products.map(product => (
           <div className="product-card" key={product._id}>
-            <img src={`http://localhost:5000/assets/${product.image}`} alt={product.name} className="product-image" />
+            <img src={`http://localhost:5000/public/assets/${product.image}`} alt={product.name} className="product-image" />
             <div className="product-info">
               <h3 className="product-name">{product.name}</h3>
               <p className="product-price">${product.price.toFixed(2)}</p>
